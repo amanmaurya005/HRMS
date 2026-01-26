@@ -1,0 +1,29 @@
+import express from "express";
+import "dotenv/config"
+import cors from "cors"
+import authRouter from "./router/auth.js";
+import cookieParser from "cookie-parser";
+import connectToDB from "./db/connectToDb.js";
+import DepartmentRouter from "./router/department.js";
+import EmployeeRouter from "./router/employee.js";
+
+const app = express();
+app.use(express.json());
+
+const frontend=process.env.VITE_BASEURL
+app.use(
+    cors({
+        origin:frontend,
+        credentials:true,
+    })
+);
+app.use(cookieParser())
+
+connectToDB();
+
+app.use("/user",authRouter);
+app.use("/department",DepartmentRouter);
+app.use("/employees",EmployeeRouter)
+
+
+app.listen(3000, console.log("server started at port 3000"))
