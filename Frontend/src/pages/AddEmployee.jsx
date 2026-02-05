@@ -120,7 +120,6 @@ export default function AddEmployee() {
       </form>
     </div>
 
-    <Link to="/add-department"><button>Add Department</button></Link>
     </div>
     </>
   );

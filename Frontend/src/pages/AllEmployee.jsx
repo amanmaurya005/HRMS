@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import instance from "../axiosConfig";
+import { Link } from "react-router-dom";
 
 export default function AllEmployees() {
   const [employees, setEmployees] = useState([]);
@@ -8,7 +9,7 @@ export default function AllEmployees() {
 
   const fetchEmployees = async () => {
     const res = await instance.get(
-      "/api/employees"
+      "/employees/get"
     );
     setEmployees(res.data);
     setLoading(false);
@@ -22,7 +23,7 @@ export default function AllEmployees() {
     if (!window.confirm("Delete this employee?")) return;
 
     await instance.delete(
-      `/api/employees/${id}`
+      `/employees/delete/${id}`
     );
 
     fetchEmployees();
@@ -35,9 +36,9 @@ export default function AllEmployees() {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold">Employees</h2>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">
+        <Link to="/add-employee"><button className="bg-blue-600 text-white px-4 py-2 rounded-lg">
           + Add Employee
-        </button>
+        </button></Link>
       </div>
 
       {/* Table */}
@@ -66,9 +67,11 @@ export default function AllEmployees() {
                   {emp.department?.name}
                 </td>
                 <td className="p-3 space-x-3">
-                  <button className="text-blue-600 hover:underline">
-                    Edit
-                  </button>
+                  <Link to={`/update-employee/${emp._id}`}>
+                    <button className="text-blue-600 hover:underline">
+                      Edit
+                    </button>
+                  </Link>
                   <button
                     onClick={() => deleteEmployee(emp._id)}
                     className="text-red-600 hover:underline"

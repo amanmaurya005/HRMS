@@ -15,7 +15,7 @@ export default function AddDepartment() {
     try {
       setLoading(true);
       const res = await instance.post(
-        "/department",
+        "/department/add",
         { name }
       );
 
