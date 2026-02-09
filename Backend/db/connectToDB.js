@@ -11,4 +11,4 @@ catch(error){
 }
 }
 
-export default connectToDB
+export default connectToDB;
