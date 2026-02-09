@@ -3,7 +3,7 @@ import "dotenv/config"
 import cors from "cors"
 import authRouter from "./router/auth.js";
 import cookieParser from "cookie-parser";
-import connectToDB from "./db/connectToDb.js";
+import connectToDB from "./db/connectToDB.js"
 import DepartmentRouter from "./router/department.js";
 import EmployeeRouter from "./router/employee.js";
 import AttendanceRouter from "./router/attendance.js";
@@ -11,6 +11,8 @@ import AttendanceRouter from "./router/attendance.js";
 
 const app = express();
 app.use(express.json());
+
+connectToDB()
 
 const frontend=process.env.VITE_BASEURL
 app.use(
@@ -21,7 +23,6 @@ app.use(
 );
 app.use(cookieParser())
 
-connectToDB();
 
 app.use("/user",authRouter);
 app.use("/department",DepartmentRouter);
