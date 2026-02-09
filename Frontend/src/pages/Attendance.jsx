@@ -93,7 +93,7 @@ export default function Attendance() {
 
   useEffect(() => {
     fetchHistory();
-  }, [fromDate, toDate]);
+  }, [historyEmployee, fromDate, toDate]);
 
   // =========================
   // UI
